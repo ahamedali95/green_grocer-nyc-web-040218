@@ -51,9 +51,13 @@ describe "Grocer" do
     context "base case - with perfect coupon (number of items identical):" do
       before(:each) do
         @avocado = find_item('AVOCADO')
+        #{"AVOCADO" => {:price => 3.00, :clearance => true}}
         @avocado_coupon = coupons.find { |coupon| coupon[:item] == "AVOCADO" }
+        #{:item => "AVOCADO", :num => 2, :cost => 5.00}
         @cart = [@avocado, @avocado]
+        #[{"AVOCADO" => {:price => 3.00, :clearance => true}}, {"AVOCADO" => {:price => 3.00, :clearance => true}}]
         @consolidated_cart = consolidate_cart(@cart)
+        #{"AVOCADO"=>{:price=>3.0, :clearance=>true, :count=>2}}
         @avocado_result = apply_coupons(@consolidated_cart, [@avocado_coupon])
       end
 
